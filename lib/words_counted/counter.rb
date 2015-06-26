@@ -51,8 +51,8 @@ module WordsCounted
       sort_by_descending_value word_occurrences
     end
 
-    def sorted_word_lengths
-      sort_by_descending_value word_lengths
+    def sorted_word_lengths(order=:desc)
+      sort_by_value(word_lengths, order)
     end
 
     def count(match)
@@ -65,8 +65,12 @@ module WordsCounted
       entries.group_by { |_, value| value }.sort.last.last
     end
 
-    def sort_by_descending_value(entries)
-      entries.sort_by { |_, value| value }.reverse
+    def sort_by_value(entries, order)
+      if order == :desc
+        entries.sort_by { |_, value| value }.reverse
+      else
+        entries.sort_by { |_, value| value }
+      end
     end
 
     def regexp
