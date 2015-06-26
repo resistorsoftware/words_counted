@@ -73,6 +73,10 @@ module WordsCounted
       end
     end
 
+    def sort_by_descending_value entries
+      entries.sort_by { |_, value| value }.reverse
+    end
+
     def regexp
       @options[:regexp] || WORD_REGEXP
     end
